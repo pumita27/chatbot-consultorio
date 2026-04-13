@@ -1,0 +1,14 @@
+{
+  "name": "chatbot-consultorio",
+  "version": "1.0.0",
+  "description": "Chatbot WhatsApp para consultorio de cirugía digestiva",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@builderbot/bot": "latest",
+    "@builderbot/provider-meta": "latest",
+    "@builderbot/database-json": "latest"
+  }
+}
