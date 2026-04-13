@@ -31,7 +31,7 @@ const flowBienvenida = addKeyword(EVENTS.WELCOME)
 const flowReflujo = addKeyword([])
   .addAnswer(
     `Entiendo. El reflujo, la acidez y la hernia hiatal son algunas de las consultas más frecuentes en cirugía digestiva alta.\n\n` +
-    `El Dr. Puma Choque está especializado en:\n` +
+    `El Dr. Puma Choque Rolando está especializado en:\n` +
     `• Evaluación y tratamiento del reflujo gastroesofágico\n` +
     `• Diagnóstico y cirugía de hernia hiatal\n` +
     `• Cirugía antirreflujo (funduplicatura laparoscópica)\n\n` +
@@ -50,7 +50,7 @@ const flowReflujo = addKeyword([])
 // ─── FLUJO: DISFAGIA ─────────────────────────────────────────────
 const flowDisfagia = addKeyword([])
   .addAnswer(
-    `La dificultad para tragar puede tener diferentes causas. El Dr. Puma Choque se especializa en:\n\n` +
+    `La dificultad para tragar puede tener diferentes causas. El Dr. Puma Choque Rolando se especializa en:\n\n` +
     `• Diagnóstico y tratamiento de acalasia\n` +
     `• Trastornos motores esofágicos\n` +
     `• Miotomía de Heller laparoscópica\n\n` +
@@ -68,7 +68,7 @@ const flowDisfagia = addKeyword([])
 // ─── FLUJO: VESÍCULA ─────────────────────────────────────────────
 const flowVesicula = addKeyword([])
   .addAnswer(
-    `El dolor abdominal relacionado a la vesícula es muy frecuente. El Dr. Puma Choque realiza:\n\n` +
+    `El dolor abdominal relacionado a la vesícula es muy frecuente. El Dr. Puma Choque Rolando realiza:\n\n` +
     `• Colecistectomía laparoscópica (extracción de vesícula)\n` +
     `• Evaluación y diagnóstico de cólicos biliares\n` +
     `• Cirugía mínimamente invasiva\n\n` +
@@ -86,7 +86,7 @@ const flowVesicula = addKeyword([])
 // ─── FLUJO: YA TENGO DIAGNÓSTICO ─────────────────────────────────
 const flowDiagnostico = addKeyword([])
   .addAnswer(
-    `Perfecto, en ese caso lo mejor es una consulta directa con el Dr. Puma Choque para revisar tu situación en detalle.\n\n` +
+    `Perfecto, en ese caso lo mejor es una consulta directa con el Dr. Puma Choque Rolando para revisar tu situación en detalle.\n\n` +
     `Podemos coordinar:\n` +
     `1️⃣ Consulta presencial\n` +
     `2️⃣ Teleconsulta (solo particulares)`,
@@ -113,7 +113,7 @@ const flowInfo = addKeyword([])
     `📅 *Turnos:* Con turno programado. Los horarios varían según agenda.\n` +
     `💻 *Teleconsultas:* Disponibles para pacientes particulares.\n` +
     `🏥 *Cirugías:* Programadas en instituciones asociadas.\n` +
-    `💳 *Prepagas:* Trabajamos con prepagas y pacientes particulares.\n` +
+    `💳 *Obras sociales:* Trabajamos con obras sociales y pacientes particulares.\n` +
     `💰 *Honorarios:* Varían según el tipo de consulta o procedimiento. Para información personalizada, dejá tus datos y te contactamos.\n\n` +
     `¿Querés solicitar un turno?\n\n` +
     `1️⃣ Sí, quiero turno\n` +
@@ -132,7 +132,7 @@ const flowSolicitarTurno = addKeyword([])
     async (ctx, { state }) => { await state.update({ nombre: ctx.body }) })
   .addAnswer('¿Cuál es el mejor horario para que te contactemos? (ej: mañanas, tardes, cualquiera)', { capture: true },
     async (ctx, { state }) => { await state.update({ horario: ctx.body }) })
-  .addAnswer('¿Tenés prepaga o sos paciente particular?', { capture: true },
+  .addAnswer('¿Tenés obra social o sos paciente particular?', { capture: true },
     async (ctx, { state }) => { await state.update({ cobertura: ctx.body }) })
   .addAnswer(
     async (ctx, { state, flowDynamic }) => {
@@ -142,7 +142,7 @@ const flowSolicitarTurno = addKeyword([])
         `Recibimos tu solicitud de turno:\n` +
         `• Horario preferido: ${datos.horario}\n` +
         `• Cobertura: ${datos.cobertura}\n\n` +
-        `El Dr. Puma Choque o su equipo se van a comunicar con vos a la brevedad por este mismo WhatsApp.\n\n` +
+        `El Dr. Puma Choque Rolando o su equipo se van a comunicar con vos a la brevedad por este mismo WhatsApp.\n\n` +
         `¡Muchas gracias por contactarte! 😊`
       ])
     }
@@ -151,15 +151,14 @@ const flowSolicitarTurno = addKeyword([])
 // ─── FLUJO: MÁS INFORMACIÓN ──────────────────────────────────────
 const flowMasInfo = addKeyword([])
   .addAnswer(
-    `Podés encontrar más información en:\n\n` +
-    `🌐 Web: https://www.doctorpuma.com.ar\n` +
-    `Si en algún momento querés pedir turno, escribinos y te ayudamos. ¡Que te vaya bien! 😊`
+    `Podés escribirnos directamente por este WhatsApp para cualquier consulta adicional.\n\n` +
+    `Si en algún momento querés pedir turno, con gusto te ayudamos. ¡Que te vaya bien! 😊`
   )
 
 // ─── FLUJO: NO ENTENDIDO ─────────────────────────────────────────
 const flowNoEntendido = addKeyword([])
   .addAnswer(
-    `Disculpá, no entendí tu respuesta. Por favor respondé con el número de la opción que corresponda:\n\n` +
+    `Disculpá, no entendí tu respuesta. Por favor respondé con el número de la opción:\n\n` +
     `1️⃣ Reflujo / acidez\n2️⃣ Dificultad para tragar\n3️⃣ Dolor abdominal / vesícula\n` +
     `4️⃣ Ya tengo diagnóstico\n5️⃣ Segunda opinión\n6️⃣ Información general`
   )
@@ -172,6 +171,7 @@ const main = async () => {
     numberId: process.env.NUMBER_ID,
     verifyToken: process.env.VERIFY_TOKEN,
     version: 'v18.0',
+    port: 3008,
   })
   const adapterFlow = createFlow([
     flowBienvenida, flowReflujo, flowDisfagia, flowVesicula,
