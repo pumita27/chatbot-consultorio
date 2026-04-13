@@ -163,29 +163,31 @@ const flowNoEntendido = addKeyword([])
     `4️⃣ Ya tengo diagnóstico\n5️⃣ Segunda opinión\n6️⃣ Información general`
   )
 
+
 // ─── INICIO DEL BOT ──────────────────────────────────────────────
-const http = require('http')
 
 const main = async () => {
   const adapterDB = new JsonFileDB({ filename: 'db.json' })
+
   const adapterProvider = new MetaProvider({
     jwtToken: process.env.JWT_TOKEN,
     numberId: process.env.NUMBER_ID,
     verifyToken: process.env.VERIFY_TOKEN,
     version: 'v18.0',
-    port: 3008,
+    port: process.env.PORT || 3008, // 🔥 clave
   })
+
   const adapterFlow = createFlow([
     flowBienvenida, flowReflujo, flowDisfagia, flowVesicula,
     flowDiagnostico, flowSegundaOpinion, flowInfo,
     flowSolicitarTurno, flowMasInfo, flowNoEntendido
   ])
-  await createBot({ flow: adapterFlow, provider: adapterProvider, database: adapterDB })
 
-  http.createServer((req, res) => {
-    res.writeHead(200)
-    res.end('Bot activo')
-}).listen(process.env.PORT || 8080)
+  await createBot({
+    flow: adapterFlow,
+    provider: adapterProvider,
+    database: adapterDB
+  })
 
   console.log('Bot iniciado correctamente ✅')
 }
