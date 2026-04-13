@@ -190,4 +190,7 @@ const main = async () => {
   console.log('Bot iniciado correctamente ✅')
 }
 
-main()
+main().catch(console.error)
+
+process.on('SIGTERM', () => {})
+process.on('SIGINT', () => {})
