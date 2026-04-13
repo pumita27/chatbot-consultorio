@@ -164,6 +164,8 @@ const flowNoEntendido = addKeyword([])
   )
 
 // ─── INICIO DEL BOT ──────────────────────────────────────────────
+const http = require('http')
+
 const main = async () => {
   const adapterDB = new JsonFileDB({ filename: 'db.json' })
   const adapterProvider = new MetaProvider({
@@ -179,6 +181,12 @@ const main = async () => {
     flowSolicitarTurno, flowMasInfo, flowNoEntendido
   ])
   await createBot({ flow: adapterFlow, provider: adapterProvider, database: adapterDB })
+
+  http.createServer((req, res) => {
+    res.writeHead(200)
+    res.end('Bot activo')
+  }).listen(process.env.PORT || 3008)
+
   console.log('Bot iniciado correctamente ✅')
 }
 
