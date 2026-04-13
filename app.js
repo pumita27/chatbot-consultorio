@@ -2,18 +2,17 @@ const { createBot, createProvider, createFlow, addKeyword, EVENTS } = require('@
 const { MetaProvider } = require('@builderbot/provider-meta')
 const { JsonFileDB } = require('@builderbot/database-json')
 
-// ─── FLUJO: BIENVENIDA ───────────────────────────────────────────
 const flowBienvenida = addKeyword(EVENTS.WELCOME)
   .addAnswer(
-    `¡Hola! 👋 Bienvenido/a al consultorio del *Dr. [TU NOMBRE]*.\n` +
-    `Soy el asistente virtual y estoy acá para ayudarte.\n\n` +
-    `¿Qué síntoma o problema querés evaluar?\n\n` +
-    `1️⃣ Reflujo / acidez / ardor\n` +
-    `2️⃣ Dificultad para tragar\n` +
-    `3️⃣ Dolor abdominal / vesícula\n` +
-    `4️⃣ Ya tengo un diagnóstico\n` +
-    `5️⃣ Quiero una segunda opinión\n` +
-    `6️⃣ Información general (turnos, honorarios)`,
+    '¡Hola! 👋 Bienvenido/a al consultorio del *Dr. Puma Choque Rolando*.\n' +
+    'Soy el asistente virtual y estoy acá para ayudarte.\n\n' +
+    '¿Qué síntoma o problema querés evaluar?\n\n' +
+    '1️⃣ Reflujo / acidez / ardor\n' +
+    '2️⃣ Dificultad para tragar\n' +
+    '3️⃣ Dolor abdominal / vesícula\n' +
+    '4️⃣ Ya tengo un diagnóstico\n' +
+    '5️⃣ Quiero una segunda opinión\n' +
+    '6️⃣ Información general (turnos, honorarios)',
     { capture: true },
     async (ctx, { gotoFlow }) => {
       const resp = ctx.body.trim()
@@ -27,18 +26,17 @@ const flowBienvenida = addKeyword(EVENTS.WELCOME)
     }
   )
 
-// ─── FLUJO: REFLUJO ──────────────────────────────────────────────
 const flowReflujo = addKeyword([])
   .addAnswer(
-    `Entiendo. El reflujo, la acidez y la hernia hiatal son algunas de las consultas más frecuentes en cirugía digestiva alta.\n\n` +
-    `El Dr. [TU NOMBRE] está especializado en:\n` +
-    `• Evaluación y tratamiento del reflujo gastroesofágico\n` +
-    `• Diagnóstico y cirugía de hernia hiatal\n` +
-    `• Cirugía antirreflujo (funduplicatura laparoscópica)\n\n` +
-    `¿Querés coordinar una consulta presencial o una teleconsulta?\n\n` +
-    `1️⃣ Consulta presencial\n` +
-    `2️⃣ Teleconsulta (solo particulares)\n` +
-    `3️⃣ Quiero más información primero`,
+    'Entiendo. El reflujo, la acidez y la hernia hiatal son algunas de las consultas más frecuentes en cirugía digestiva alta.\n\n' +
+    'El Dr. Puma Choque Rolando está especializado en:\n' +
+    '• Evaluación y tratamiento del reflujo gastroesofágico\n' +
+    '• Diagnóstico y cirugía de hernia hiatal\n' +
+    '• Cirugía antirreflujo (funduplicatura laparoscópica)\n\n' +
+    '¿Querés coordinar una consulta?\n\n' +
+    '1️⃣ Consulta presencial\n' +
+    '2️⃣ Teleconsulta (solo particulares)\n' +
+    '3️⃣ Quiero más información primero',
     { capture: true },
     async (ctx, { gotoFlow }) => {
       const resp = ctx.body.trim()
@@ -47,16 +45,15 @@ const flowReflujo = addKeyword([])
     }
   )
 
-// ─── FLUJO: DISFAGIA ─────────────────────────────────────────────
 const flowDisfagia = addKeyword([])
   .addAnswer(
-    `La dificultad para tragar puede tener diferentes causas. El Dr. [TU NOMBRE] se especializa en:\n\n` +
-    `• Diagnóstico y tratamiento de acalasia\n` +
-    `• Trastornos motores esofágicos\n` +
-    `• Miotomía de Heller laparoscópica\n\n` +
-    `Es importante evaluarte a tiempo. ¿Querés coordinar una consulta?\n\n` +
-    `1️⃣ Sí, quiero turno\n` +
-    `2️⃣ Quiero más información primero`,
+    'La dificultad para tragar puede tener diferentes causas. El Dr. Puma Choque Rolando se especializa en:\n\n' +
+    '• Diagnóstico y tratamiento de acalasia\n' +
+    '• Trastornos motores esofágicos\n' +
+    '• Miotomía de Heller laparoscópica\n\n' +
+    'Es importante evaluarte a tiempo. ¿Querés coordinar una consulta?\n\n' +
+    '1️⃣ Sí, quiero turno\n' +
+    '2️⃣ Quiero más información primero',
     { capture: true },
     async (ctx, { gotoFlow }) => {
       const resp = ctx.body.trim()
@@ -65,16 +62,15 @@ const flowDisfagia = addKeyword([])
     }
   )
 
-// ─── FLUJO: VESÍCULA ─────────────────────────────────────────────
 const flowVesicula = addKeyword([])
   .addAnswer(
-    `El dolor abdominal relacionado a la vesícula es muy frecuente. El Dr. [TU NOMBRE] realiza:\n\n` +
-    `• Colecistectomía laparoscópica (extracción de vesícula)\n` +
-    `• Evaluación y diagnóstico de cólicos biliares\n` +
-    `• Cirugía mínimamente invasiva\n\n` +
-    `¿Querés coordinar una consulta para evaluarte?\n\n` +
-    `1️⃣ Sí, quiero turno\n` +
-    `2️⃣ Quiero más información primero`,
+    'El dolor abdominal relacionado a la vesícula es muy frecuente. El Dr. Puma Choque Rolando realiza:\n\n' +
+    '• Colecistectomía laparoscópica (extracción de vesícula)\n' +
+    '• Evaluación y diagnóstico de cólicos biliares\n' +
+    '• Cirugía mínimamente invasiva\n\n' +
+    '¿Querés coordinar una consulta?\n\n' +
+    '1️⃣ Sí, quiero turno\n' +
+    '2️⃣ Quiero más información primero',
     { capture: true },
     async (ctx, { gotoFlow }) => {
       const resp = ctx.body.trim()
@@ -83,41 +79,38 @@ const flowVesicula = addKeyword([])
     }
   )
 
-// ─── FLUJO: YA TENGO DIAGNÓSTICO ─────────────────────────────────
 const flowDiagnostico = addKeyword([])
   .addAnswer(
-    `Perfecto, en ese caso lo mejor es una consulta directa con el Dr. [TU NOMBRE] para revisar tu situación en detalle.\n\n` +
-    `Podemos coordinar:\n` +
-    `1️⃣ Consulta presencial\n` +
-    `2️⃣ Teleconsulta (solo particulares)`,
+    'Perfecto, en ese caso lo mejor es una consulta directa con el Dr. Puma Choque Rolando para revisar tu situación en detalle.\n\n' +
+    '¿Cómo preferís hacerlo?\n\n' +
+    '1️⃣ Consulta presencial\n' +
+    '2️⃣ Teleconsulta (solo particulares)',
     { capture: true },
     async (ctx, { gotoFlow }) => gotoFlow(flowSolicitarTurno)
   )
 
-// ─── FLUJO: SEGUNDA OPINIÓN ──────────────────────────────────────
 const flowSegundaOpinion = addKeyword([])
   .addAnswer(
-    `Una segunda opinión es siempre una decisión inteligente antes de una cirugía.\n\n` +
-    `El Dr. [TU NOMBRE] recibe consultas de segunda opinión tanto presenciales como por teleconsulta.\n\n` +
-    `¿Cómo preferís hacerlo?\n\n` +
-    `1️⃣ Consulta presencial\n` +
-    `2️⃣ Teleconsulta`,
+    'Una segunda opinión es siempre una decisión inteligente antes de una cirugía.\n\n' +
+    'El Dr. Puma Choque Rolando recibe consultas de segunda opinión presenciales y por teleconsulta.\n\n' +
+    '¿Cómo preferís hacerlo?\n\n' +
+    '1️⃣ Consulta presencial\n' +
+    '2️⃣ Teleconsulta',
     { capture: true },
     async (ctx, { gotoFlow }) => gotoFlow(flowSolicitarTurno)
   )
 
-// ─── FLUJO: INFORMACIÓN GENERAL ──────────────────────────────────
 const flowInfo = addKeyword([])
   .addAnswer(
-    `Con gusto te cuento:\n\n` +
-    `📅 *Turnos:* Con turno programado. Los horarios varían según agenda.\n` +
-    `💻 *Teleconsultas:* Disponibles para pacientes particulares.\n` +
-    `🏥 *Cirugías:* Programadas en instituciones asociadas.\n` +
-    `💳 *Obras sociales:* Trabajamos con obras sociales y pacientes particulares.\n` +
-    `💰 *Honorarios:* Varían según el tipo de consulta o procedimiento. Para información personalizada, dejá tus datos y te contactamos.\n\n` +
-    `¿Querés solicitar un turno?\n\n` +
-    `1️⃣ Sí, quiero turno\n` +
-    `2️⃣ No por ahora, gracias`,
+    'Con gusto te cuento:\n\n' +
+    '📅 *Turnos:* Con turno programado. Los horarios varían según agenda.\n' +
+    '💻 *Teleconsultas:* Disponibles para pacientes particulares.\n' +
+    '🏥 *Cirugías:* Programadas en instituciones asociadas.\n' +
+    '💳 *Obras sociales:* Trabajamos con obras sociales y pacientes particulares.\n' +
+    '💰 *Honorarios:* Varían según consulta o procedimiento. Dejá tus datos y te contactamos.\n\n' +
+    '¿Querés solicitar un turno?\n\n' +
+    '1️⃣ Sí, quiero turno\n' +
+    '2️⃣ No por ahora, gracias',
     { capture: true },
     async (ctx, { gotoFlow, endFlow }) => {
       const resp = ctx.body.trim()
@@ -126,46 +119,49 @@ const flowInfo = addKeyword([])
     }
   )
 
-// ─── FLUJO: SOLICITAR TURNO ──────────────────────────────────────
 const flowSolicitarTurno = addKeyword([])
-  .addAnswer('Para coordinar tu turno necesito algunos datos. ¿Cuál es tu nombre completo?', { capture: true },
-    async (ctx, { state }) => { await state.update({ nombre: ctx.body }) })
-  .addAnswer('¿Cuál es el mejor horario para que te contactemos? (ej: mañanas, tardes, cualquiera)', { capture: true },
-    async (ctx, { state }) => { await state.update({ horario: ctx.body }) })
-  .addAnswer('¿Tenés obra social o sos paciente particular?', { capture: true },
-    async (ctx, { state }) => { await state.update({ cobertura: ctx.body }) })
+  .addAnswer('Para coordinar tu turno necesito algunos datos. ¿Cuál es tu nombre completo?',
+    { capture: true },
+    async (ctx, { state }) => { await state.update({ nombre: ctx.body }) }
+  )
+  .addAnswer('¿Cuál es el mejor horario para contactarte? (ej: mañanas, tardes, cualquiera)',
+    { capture: true },
+    async (ctx, { state }) => { await state.update({ horario: ctx.body }) }
+  )
+  .addAnswer('¿Tenés obra social o sos paciente particular?',
+    { capture: true },
+    async (ctx, { state }) => { await state.update({ cobertura: ctx.body }) }
+  )
   .addAnswer(
     async (ctx, { state, flowDynamic }) => {
       const datos = state.getMyState()
       await flowDynamic([
-        `¡Perfecto, ${datos.nombre}! 🙌\n\n` +
-        `Recibimos tu solicitud de turno:\n` +
-        `• Horario preferido: ${datos.horario}\n` +
-        `• Cobertura: ${datos.cobertura}\n\n` +
-        `El Dr. [TU NOMBRE] o su equipo se van a comunicar con vos a la brevedad por este mismo WhatsApp.\n\n` +
-        `¡Muchas gracias por contactarte! 😊`
+        '¡Perfecto, ' + datos.nombre + '! 🙌\n\n' +
+        'Recibimos tu solicitud:\n' +
+        '• Horario preferido: ' + datos.horario + '\n' +
+        '• Cobertura: ' + datos.cobertura + '\n\n' +
+        'El Dr. Puma Choque Rolando o su equipo te contactarán a la brevedad por este WhatsApp.\n\n' +
+        '¡Muchas gracias! 😊'
       ])
     }
   )
 
-// ─── FLUJO: MÁS INFORMACIÓN ──────────────────────────────────────
 const flowMasInfo = addKeyword([])
   .addAnswer(
-    `Podés encontrar más información en:\n\n` +
-    `🌐 Web: [TU SITIO WEB]\n` +
-    `📧 Email: [TU EMAIL]\n\n` +
-    `Si en algún momento querés pedir turno, escribinos y te ayudamos. ¡Que te vaya bien! 😊`
+    'Si en algún momento querés pedir turno, escribinos y te ayudamos. ¡Que te vaya bien! 😊'
   )
 
-// ─── FLUJO: NO ENTENDIDO ─────────────────────────────────────────
 const flowNoEntendido = addKeyword([])
   .addAnswer(
-    `Disculpá, no entendí tu respuesta. Por favor respondé con el número de la opción que corresponda:\n\n` +
-    `1️⃣ Reflujo / acidez\n2️⃣ Dificultad para tragar\n3️⃣ Dolor abdominal / vesícula\n` +
-    `4️⃣ Ya tengo diagnóstico\n5️⃣ Segunda opinión\n6️⃣ Información general`
+    'Disculpá, no entendí tu respuesta. Por favor respondé con el número de la opción:\n\n' +
+    '1️⃣ Reflujo / acidez\n' +
+    '2️⃣ Dificultad para tragar\n' +
+    '3️⃣ Dolor abdominal / vesícula\n' +
+    '4️⃣ Ya tengo diagnóstico\n' +
+    '5️⃣ Segunda opinión\n' +
+    '6️⃣ Información general'
   )
 
-// ─── INICIO DEL BOT ──────────────────────────────────────────────
 const main = async () => {
   const adapterDB = new JsonFileDB({ filename: 'db.json' })
   const adapterProvider = new MetaProvider({
@@ -175,14 +171,23 @@ const main = async () => {
     version: 'v18.0',
   })
   const adapterFlow = createFlow([
-    flowBienvenida, flowReflujo, flowDisfagia, flowVesicula,
-    flowDiagnostico, flowSegundaOpinion, flowInfo,
-    flowSolicitarTurno, flowMasInfo, flowNoEntendido
+    flowBienvenida,
+    flowReflujo,
+    flowDisfagia,
+    flowVesicula,
+    flowDiagnostico,
+    flowSegundaOpinion,
+    flowInfo,
+    flowSolicitarTurno,
+    flowMasInfo,
+    flowNoEntendido
   ])
   await createBot({
     flow: adapterFlow,
     provider: adapterProvider,
     database: adapterDB
   }, { port: 3008 })
+  console.log('Bot iniciado correctamente ✅')
+}
 
 main()
