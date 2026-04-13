@@ -179,8 +179,10 @@ const main = async () => {
     flowDiagnostico, flowSegundaOpinion, flowInfo,
     flowSolicitarTurno, flowMasInfo, flowNoEntendido
   ])
-  await createBot({ flow: adapterFlow, provider: adapterProvider, database: adapterDB })
-  console.log('Bot iniciado correctamente ✅')
-}
+  await createBot({
+    flow: adapterFlow,
+    provider: adapterProvider,
+    database: adapterDB
+  }, { port: 3008 })
 
 main()
