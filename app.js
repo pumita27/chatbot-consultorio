@@ -166,7 +166,11 @@ const flowNoEntendido = addKeyword([])
 
 // ─── INICIO DEL BOT ──────────────────────────────────────────────
 
+const express = require('express')
+
 const main = async () => {
+  const app = express()
+
   const adapterDB = new JsonFileDB({ filename: 'db.json' })
 
   const adapterProvider = new MetaProvider({
@@ -174,7 +178,7 @@ const main = async () => {
     numberId: process.env.NUMBER_ID,
     verifyToken: process.env.VERIFY_TOKEN,
     version: 'v18.0',
-    port: process.env.PORT || 3008, // 🔥 clave
+    port: process.env.PORT, // 🔥 SIN fallback
   })
 
   const adapterFlow = createFlow([
@@ -189,7 +193,15 @@ const main = async () => {
     database: adapterDB
   })
 
-  console.log('Bot iniciado correctamente ✅')
+  // 👇 endpoint base (mantiene vivo el server)
+  app.get('/', (req, res) => {
+    res.send('Bot activo ✅')
+  })
+
+  // 🔥 ESTE ES EL QUE MANTIENE VIVO EL CONTENEDOR
+  app.listen(process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto ${process.env.PORT}`)
+  })
 }
 
 main()
