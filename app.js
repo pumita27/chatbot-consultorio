@@ -165,7 +165,7 @@ app.post('/webhook', async (req, res) => {
     const texto = msg.text?.body || ''
     await procesar(telefono, texto)
   } catch (e) {
-    console.error('Error:', e.message)
+    console.error('Error completo:', JSON.stringify(e.response?.data || e.message))
   }
 })
 
