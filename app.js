@@ -7,20 +7,30 @@ const TOKEN = process.env.VERIFY_TOKEN
 const JWT = process.env.JWT_TOKEN
 const NUMBER_ID = process.env.NUMBER_ID
 
-// Estado de conversación por usuario
 const estado = {}
 
 async function enviar(telefono, mensaje) {
-  await axios.post(
-    `https://graph.facebook.com/v18.0/${NUMBER_ID}/messages`,
-    {
+  try {
+    const url = `https://graph.facebook.com/v19.0/${NUMBER_ID}/messages`
+    const payload = {
       messaging_product: 'whatsapp',
       to: telefono,
       type: 'text',
       text: { body: mensaje }
-    },
-    { headers: { Authorization: `Bearer ${JWT}`, 'Content-Type': 'application/json' } }
-  )
+    }
+    console.log('Enviando a:', telefono)
+    console.log('NUMBER_ID:', NUMBER_ID)
+    const response = await axios.post(url, payload, {
+      headers: {
+        Authorization: `Bearer ${JWT}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log('Enviado OK:', JSON.stringify(response.data))
+  } catch (e) {
+    console.error('Error detallado:', JSON.stringify(e.response?.data))
+    console.error('Status:', e.response?.status)
+  }
 }
 
 async function procesar(telefono, mensaje) {
@@ -132,14 +142,13 @@ async function procesar(telefono, mensaje) {
       `Recibimos tu solicitud:\n` +
       `• Horario preferido: ${datos.horario}\n` +
       `• Cobertura: ${datos.cobertura}\n\n` +
-      `El Dr. Puma Choque Rolando o su equipo te contactarán a la brevedad por este WhatsApp.\n\n` +
+      `El Dr. Puma Choque Rolando o su equipo te contactarán a la brevedad.\n\n` +
       `¡Muchas gracias! 😊`
     )
     return
   }
 }
 
-// Verificación del webhook
 app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode']
   const token = req.query['hub.verify_token']
@@ -152,7 +161,6 @@ app.get('/webhook', (req, res) => {
   }
 })
 
-// Recepción de mensajes
 app.post('/webhook', async (req, res) => {
   res.sendStatus(200)
   try {
@@ -163,13 +171,14 @@ app.post('/webhook', async (req, res) => {
     if (!msg) return
     const telefono = msg.from
     const texto = msg.text?.body || ''
+    console.log('Mensaje recibido de:', telefono, '→', texto)
     await procesar(telefono, texto)
   } catch (e) {
-    console.error('Error completo:', JSON.stringify(e.response?.data || e.message))
+    console.error('Error webhook:', JSON.stringify(e.response?.data || e.message))
   }
 })
 
 app.get('/', (req, res) => res.send('Bot activo ✅'))
 
-const PORT = process.env.PORT || 3008
+const PORT = process.env.PORT || 8080
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT} ✅`))
