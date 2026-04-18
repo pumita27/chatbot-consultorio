@@ -169,7 +169,10 @@ app.post('/webhook', async (req, res) => {
     const value = changes?.value
     const msg = value?.messages?.[0]
     if (!msg) return
-    const telefono = msg.from
+    let telefono = msg.from
+if (telefono.startsWith('549')) {
+  telefono = '54' + telefono.slice(3)
+}
     const texto = msg.text?.body || ''
     console.log('Mensaje recibido de:', telefono, '→', texto)
     await procesar(telefono, texto)
